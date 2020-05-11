@@ -20,3 +20,6 @@ class Stack():
             return print(self.stack[-1])
         else:
             return print("stack is empty")
+    def top(self):
+        if not self.is_empty():
+            return self.stack[-1]
