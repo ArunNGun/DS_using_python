@@ -11,11 +11,20 @@ class Link_list:
     def __init__(self):
         self.head=None
 
+
     def print_list(self):
         temp_node=self.head
         while temp_node:
             print(temp_node.data)
             temp_node=temp_node.next
+
+    def list_length(self):
+        temp_node=self.head
+        length=0
+        while temp_node:
+            length+=1
+            temp_node=temp_node.next
+        return length
 
     def append(self,data):
         new_node=Node(data)
@@ -51,6 +60,40 @@ class Link_list:
             curr_node=curr_node.next
         prev_node.next=curr_node.next
 
+    def swap(self,data1,data2):
+
+        if data1==data2:
+            print("both data are same and cannot perform swap on single node")
+            return
+
+        curr1=self.head
+        prev1=None
+        while curr1.data!=data1:
+            prev1=curr1
+            curr1=curr1.next
+
+        curr2=self.head
+        prev2=None
+        while curr2.data!=data2:
+            prev2=curr2
+            curr2=curr2.next
+
+        if curr1.data==self.head.data:
+            curr1.next=curr2.next
+            curr2.next=curr1
+            self.head=curr2
+
+        elif curr2.data==self.head.data:
+            curr2.next=curr1.next
+            curr1.next=curr2
+            self.head=curr1
+
+        else:
+            prev1.next=curr2
+            prev2.next=curr1
+            curr1.next,curr2.next=curr2.next,curr1.next
+
+
 
 llist=Link_list()
 print("****append at last****")
@@ -67,4 +110,9 @@ llist.prepend("F")
 llist.print_list()
 print("******delete******")
 llist.delete_node("E")
+llist.print_list()
+print("the length od link list is :"+str(llist.list_length()))
+
+print("****swaping two nodes******* ")
+llist.swap("F","C")
 llist.print_list()
